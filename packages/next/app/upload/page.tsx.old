@@ -1,0 +1,240 @@
+'use client'
+
+import React, { useEffect } from 'react';
+import Uppy from '@uppy/core';
+import { Dashboard } from '@uppy/react';
+import RemoteSources from '@uppy/remote-sources';
+import AwsS3Multipart from '@uppy/aws-s3-multipart';
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const uppy = new Uppy()
+
+
+
+// uppy.use(AwsS3Multipart, {
+//     limit: 6,
+//     companionUrl: process.env.NEXT_PUBLIC_UPPY_COMPANION_URL,
+//     // companionHeaders: {
+//     //     // @todo
+//     //     // Authorization: `Bearer ${Alpine.store('auth').jwt}`
+//     // }
+// })
+
+
+// Dashboard,
+//     { 
+//         inline: true, 
+//         target: '#uppy-dashboard', 
+//         theme: 'auto',
+//         proudlyDisplayPoweredByUppy: false,
+//         disableInformer: false,
+//         // metaFields: [
+//         //   @todo maybe add meta fields once https://github.com/transloadit/uppy/issues/4427 is fixed
+//         //   {
+//         //     id: 'announceUrl',
+//         //     name: 'Stream Announcement URL',
+//         //     placeholder: 'this is a placeholder'
+//         //   },
+//         //   {
+//         //     id: 'note',
+//         //     name: 'Note'
+//         //   }
+//         //   {
+//         //     id: 'date',
+//         //     name: 'Stream Date (ISO 8601)',
+//         //     placeholder: '2022-12-30'
+//         //   },
+//         // ]
+//     }
+// )
+
+// import Uppy from '@uppy/core';
+// import Dashboard from '@uppy/dashboard';
+// import '/@root/node_modules/@uppy/core/dist/style.min.css';
+// import '/@root/node_modules/@uppy/dashboard/dist/style.min.css';
+
+
+
+export default function Page() {
+    // const dashboard = new Dashboard({
+    //     inline: true, 
+    //     target: '#uppy-dashboard', 
+    //     theme: 'dark',
+    //     proudlyDisplayPoweredByUppy: false,
+    //     disableInformer: false,
+    // })
+
+
+    // useEffect(() => {
+    //     uppy.setOptions({
+    //         Dashboard: {
+    //             theme: 'dark'
+    //         }
+    //     })
+    // })
+
+    // useEffect(() => {
+    //     uppy.setOptions({
+    //         restrictions: props.restrictions
+    //     })
+    // }, [props.restrictions])
+
+    //         .use(
+    //           Dashboard,
+    //           { 
+    //             inline: true, 
+    //             target: '#uppy-dashboard', 
+    //             theme: 'auto',
+    //             proudlyDisplayPoweredByUppy: false,
+    //             disableInformer: false,
+    //             // metaFields: [
+    //             //   @todo maybe add meta fields once https://github.com/transloadit/uppy/issues/4427 is fixed
+    //             //   {
+    //             //     id: 'announceUrl',
+    //             //     name: 'Stream Announcement URL',
+    //             //     placeholder: 'this is a placeholder'
+    //             //   },
+    //             //   {
+    //             //     id: 'note',
+    //             //     name: 'Note'
+    //             //   }
+    //             //   {
+    //             //     id: 'date',
+    //             //     name: 'Stream Date (ISO 8601)',
+    //             //     placeholder: '2022-12-30'
+    //             //   },
+    //             // ]
+    //           }
+    //         )
+    //         .use(RemoteSources, {
+    //           companionUrl: process.env.NEXT_PUBLIC_UPPY_COMPANION_URL,
+    //           sources: ['Box', 'OneDrive', 'Dropbox', 'GoogleDrive', 'Url'],
+    //         })
+    //         .use(AwsS3Multipart, {
+    //           limit: 6,
+    //           companionUrl: process.env.NEXT_PUBLIC_UPPY_COMPANION_URL,
+    //         //   companionHeaders: {
+    //         //     Authorization: `Bearer ${Alpine.store('auth').jwt}`
+    //         //   }
+    //         })
+
+    return (
+        <>
+            <Dashboard 
+                uppy={uppy} 
+                plugins={[
+                    'Dashboard', 
+                    'AwsS3Multipart', 
+                    'RemoteSources'
+                ]}
+                theme={'auto'}
+            ></Dashboard>
+        </>
+    )
+}
+
+// export default function upload () {
+//   return {
+//     date: '',
+//     note: '',
+//     init () {
+//       const that = this
+//       const uppy = new Uppy({
+//         onBeforeUpload (files) {
+//           if (!that.date) {
+//             const msg = 'File is missing a Stream Date'
+//             uppy.info(msg, 'error')
+//             throw new Error(msg)
+//           }
+//         },
+//         restrictions: {
+//           maxNumberOfFiles: 1,
+//           // requiredMetaFields: [
+//           //   'announceUrl',
+//           //   'date'
+//           // ]
+//         },
+//       })
+//         .use(
+//           Dashboard,
+//           { 
+//             inline: true, 
+//             target: '#uppy-dashboard', 
+//             theme: 'auto',
+//             proudlyDisplayPoweredByUppy: false,
+//             disableInformer: false,
+//             // metaFields: [
+//             //   @todo maybe add meta fields once https://github.com/transloadit/uppy/issues/4427 is fixed
+//             //   {
+//             //     id: 'announceUrl',
+//             //     name: 'Stream Announcement URL',
+//             //     placeholder: 'this is a placeholder'
+//             //   },
+//             //   {
+//             //     id: 'note',
+//             //     name: 'Note'
+//             //   }
+//             //   {
+//             //     id: 'date',
+//             //     name: 'Stream Date (ISO 8601)',
+//             //     placeholder: '2022-12-30'
+//             //   },
+//             // ]
+//           }
+//         )
+//         .use(RemoteSources, {
+//           companionUrl: window.companionUrl,
+//           sources: ['Box', 'OneDrive', 'Dropbox', 'GoogleDrive', 'Url'],
+//         })
+//         .use(AwsS3Multipart, {
+//           limit: 6,
+//           companionUrl: window.companionUrl,
+//           companionHeaders: {
+//             Authorization: `Bearer ${Alpine.store('auth').jwt}`
+//           }
+//         })
+
+
+//       uppy.on('file-added', (file) => {
+//         if (!that.date) {
+//           uppy.info("Please add the Stream Date to metadata", 'info', 5000)
+//         }
+//       });
+
+
+//       uppy.on('complete', (result) => {
+//         // for each uploaded vod, create a Vod in Strapi
+//         result.successful.forEach(async (upload) => {
+//           const res = await fetch(`${Alpine.store('env').backend}/api/vod/createFromUppy`, {
+//             method: 'POST',
+//             headers: {
+//               'Authorization': `Bearer ${Alpine.store('auth').jwt}`,
+//               'Accept': 'application/json',
+//               'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//               data: {
+//                 date: that.date,
+//                 videoSrcB2: {
+//                   key: upload.s3Multipart.key,
+//                   uploadId: upload.s3Multipart.uploadId
+//                 },
+//                 note: that.note,
+//               }
+//             })
+//           })
+
+//           if (res.ok) {
+//             uppy.info("Thank you. The VOD is queued for approval by a moderator.", 'success', 60000)
+//           } else {
+//             uppy.error("There was a problem while uploading. Please try again later.", 'error', 10000)
+//           }
+//         })
+
+//       })
+//     }  
+//   }
+// }

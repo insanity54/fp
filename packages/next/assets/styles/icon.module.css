@@ -1,0 +1,20 @@
+
+svg.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: rgb(208, 209, 205);
+}
+
+svg.icon path {
+    fill: rgb(208, 209, 205);
+}
+
+svg.icon g path {
+    fill: rgb(208, 209, 205) !important;
+}
+
+svg.bigIcon {
+    width: 10em;
+    height: 10em;
+}

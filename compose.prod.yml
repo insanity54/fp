@@ -1,0 +1,103 @@
+version: '3.4'
+
+
+services:
+
+  link2cid:
+    container_name: fp-link2cid
+    image: insanity54/link2cid:latest
+    ports:
+      - "3939:3939"
+    environment:
+      API_KEY: ${LINK2CID_API_KEY}
+      IPFS_URL: "http://ipfs0:5001"
+
+  ipfs0:
+    container_name: fp-ipfs0
+    image: ipfs/kubo:release
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./packages/ipfs0:/data/ipfs
+
+  cluster0:
+    container_name: fp-cluster0
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+      - ipfs0
+    environment:
+      CLUSTER_PEERNAME: cluster0
+      CLUSTER_SECRET: ${CLUSTER_SECRET} # From shell variable if set
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
+      CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
+      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
+      CLUSTER_RESTAPI_BASICAUTHCREDENTIALS: ${CLUSTER_RESTAPI_BASICAUTHCREDENTIALS}
+      CLUSTER_MONITORPINGINTERVAL: 2s # Speed up peer discovery
+    ports:
+      - "127.0.0.1:9094:9094"
+    volumes:
+      - ./packages/cluster0:/data/ipfs-cluster
+
+  strapi:
+    container_name: fp-strapi
+    image: elestio/strapi-development
+    depends_on:
+      - db
+    environment:
+      ADMIN_PASSWORD: ${STRAPI_ADMIN_PASSWORD}
+      ADMIN_EMAIL: ${STRAPI_ADMIN_EMAIL}
+      BASE_URL: ${STRAPI_BASE_URL}
+      SMTP_HOST: 172.17.0.1
+      SMTP_PORT: 25
+      SMTP_AUTH_STRATEGY: NONE
+      SMTP_FROM_EMAIL: sender@email.com
+      DATABASE_CLIENT: postgres
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${STRAPI_JWT_SECRET}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      APP_KEYS: ${STRAPI_APP_KEYS}
+      NODE_ENV: development
+      DATABASE_HOST: db
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+      TRANSFER_TOKEN_SALT: ${STRAPI_TRANSFER_TOKEN_SALT}
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./packages/strapi/config:/opt/app/config
+      - ./packages/strapi/src:/opt/app/src
+      # - ./packages/strapi/package.json:/opt/package.json
+      # - ./packages/strapi/yarn.lock:/opt/yarn.lock
+      - ./packages/strapi/.env:/opt/app/.env
+      - ./packages/strapi/public/uploads:/opt/app/public/uploads
+      # - ./packages/strapi/entrypoint.sh:/opt/app/entrypoint.sh
+
+  next:
+    container_name: fp-next
+    build:
+      context: ./packages/next
+      dockerfile: Dockerfile
+    environment:
+      REVALIDATION_TOKEN: ${NEXT_REVALIDATION_TOKEN}
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/next/
+
+
+  db:
+    container_name: fp-db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - ./packages/db/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"

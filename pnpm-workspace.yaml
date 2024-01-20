@@ -1,0 +1,5 @@
+packages:
+  - 'packages/next'
+  - 'packages/uppy'
+
+# strapi is not on here because it's not compatible with pnpm

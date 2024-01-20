@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "patreons",
+  "info": {
+    "singularName": "patreon",
+    "pluralName": "patreons",
+    "displayName": "Patreon",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "benefitId": {
+      "type": "string",
+      "required": true,
+      "default": "4760169"
+    },
+    "accessToken": {
+      "type": "string"
+    },
+    "refreshToken": {
+      "type": "string"
+    },
+    "campaignId": {
+      "type": "string",
+      "required": true
+    },
+    "muxAllocationCostCents": {
+      "type": "integer",
+      "default": 50,
+      "required": true
+    },
+    "membershipId": {
+      "type": "string"
+    }
+  }
+}

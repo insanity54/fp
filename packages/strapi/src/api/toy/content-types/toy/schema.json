@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "toys",
+  "info": {
+    "singularName": "toy",
+    "pluralName": "toys",
+    "displayName": "Toy",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "toy"
+    },
+    "make": {
+      "type": "string",
+      "required": true
+    },
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "2:1",
+      "required": true
+    },
+    "image2": {
+      "type": "string",
+      "default": "https://futureporn-b2.b-cdn.net/default-thumbnail.webp",
+      "required": true
+    },
+    "linkTag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag"
+    },
+    "vtubers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vtuber.vtuber",
+      "mappedBy": "toy"
+    }
+  }
+}

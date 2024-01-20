@@ -1,0 +1,142 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vods",
+  "info": {
+    "singularName": "vod",
+    "pluralName": "vods",
+    "displayName": "VOD",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "videoSrcHash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "required": false,
+      "unique": true
+    },
+    "video720Hash": {
+      "type": "string",
+      "unique": true,
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}"
+    },
+    "video480Hash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "unique": true
+    },
+    "video360Hash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "unique": true
+    },
+    "video240Hash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "unique": true
+    },
+    "thinHash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "unique": true
+    },
+    "thiccHash": {
+      "type": "string",
+      "regex": "Qm[1-9A-HJ-NP-Za-km-z]{44,}|b[A-Za-z2-7]{58,}|B[A-Z2-7]{58,}|z[1-9A-HJ-NP-Za-km-z]{48,}|F[0-9A-F]{50,}",
+      "unique": true
+    },
+    "announceTitle": {
+      "type": "string"
+    },
+    "announceUrl": {
+      "type": "string",
+      "unique": false
+    },
+    "note": {
+      "type": "text"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "date2": {
+      "type": "string",
+      "required": true
+    },
+    "spoilers": {
+      "type": "richtext"
+    },
+    "title": {
+      "type": "string"
+    },
+    "uploader": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "muxAsset": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mux-asset.mux-asset"
+    },
+    "videoSrcB2": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::b2-file.b2-file"
+    },
+    "thumbnail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::b2-file.b2-file"
+    },
+    "chatLog": {
+      "type": "richtext"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "vods"
+    },
+    "timestamps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::timestamp.timestamp",
+      "mappedBy": "vod"
+    },
+    "tagVodRelations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag-vod-relation.tag-vod-relation",
+      "mappedBy": "vod"
+    },
+    "vtuber": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vtuber.vtuber",
+      "inversedBy": "vods"
+    },
+    "stream": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::stream.stream",
+      "inversedBy": "vods"
+    },
+    "archiveStatus": {
+      "type": "enumeration",
+      "enum": [
+        "missing",
+        "issue",
+        "good"
+      ],
+      "required": false,
+      "default": "issue"
+    },
+    "cuid": {
+      "type": "string",
+      "unique": true
+    }
+  }
+}

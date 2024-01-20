@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "gogss",
+  "info": {
+    "singularName": "gogs",
+    "pluralName": "gogss",
+    "displayName": "Gogs"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "apiKey": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "default": "https://git.futureporn.net"
+    }
+  }
+}

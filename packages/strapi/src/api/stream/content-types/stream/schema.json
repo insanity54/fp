@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "streams",
+  "info": {
+    "singularName": "stream",
+    "pluralName": "streams",
+    "displayName": "Stream",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date_str": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)"
+    },
+    "date2": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z)"
+    },
+    "vods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vod.vod",
+      "mappedBy": "stream"
+    },
+    "vtuber": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vtuber.vtuber",
+      "inversedBy": "streams"
+    },
+    "tweet": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tweet.tweet"
+    },
+    "date": {
+      "type": "datetime",
+      "required": true,
+      "unique": true
+    },
+    "archiveStatus": {
+      "type": "enumeration",
+      "enum": [
+        "missing",
+        "issue",
+        "good"
+      ],
+      "required": true,
+      "default": "missing"
+    },
+    "cuid": {
+      "type": "string",
+      "unique": true,
+      "required": false
+    },
+    "isChaturbateStream": {
+      "type": "boolean",
+      "default": false
+    },
+    "isFanslyStream": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

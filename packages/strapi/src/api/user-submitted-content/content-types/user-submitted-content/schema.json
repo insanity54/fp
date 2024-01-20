@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_submitted_contents",
+  "info": {
+    "singularName": "user-submitted-content",
+    "pluralName": "user-submitted-contents",
+    "displayName": "User Submitted Content",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "uploader": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "attribution": {
+      "type": "boolean",
+      "default": false
+    },
+    "date": {
+      "type": "string",
+      "required": true
+    },
+    "notes": {
+      "type": "richtext"
+    },
+    "files": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

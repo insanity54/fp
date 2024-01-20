@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mux_assets",
+  "info": {
+    "singularName": "mux-asset",
+    "pluralName": "mux-assets",
+    "displayName": "Mux Asset",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "playbackId": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    },
+    "assetId": {
+      "type": "string",
+      "unique": true
+    },
+    "deletionQueuedAt": {
+      "type": "datetime"
+    }
+  }
+}

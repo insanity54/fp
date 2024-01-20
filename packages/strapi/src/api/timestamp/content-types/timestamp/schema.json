@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "timestamps",
+  "info": {
+    "singularName": "timestamp",
+    "pluralName": "timestamps",
+    "displayName": "Timestamp",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false,
+    "populateCreatorFields": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "time": {
+      "type": "integer",
+      "required": true
+    },
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag",
+      "required": true
+    },
+    "vod": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vod.vod",
+      "inversedBy": "timestamps"
+    },
+    "creatorId": {
+      "type": "integer",
+      "required": true
+    },
+    "upvoters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "downvoters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

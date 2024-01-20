@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.cid {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    flex: 1;
+}
+
+.label {
+    width: 6em;
+}
+
+.green {
+    color: rgb(52, 168, 115);
+}

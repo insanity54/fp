@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "b2_files",
+  "info": {
+    "singularName": "b2-file",
+    "pluralName": "b2-files",
+    "displayName": "B2 File",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "key": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "uploadId": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "cdnUrl": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

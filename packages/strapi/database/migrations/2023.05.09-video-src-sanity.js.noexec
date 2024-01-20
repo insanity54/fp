@@ -1,0 +1,26 @@
+
+const fetch = require('node-fetch')
+
+let problemUrls = []
+
+async function checkUrl(url) {
+  const res = await fetch(url);
+  if (!res.ok || !res?.headers?.get('x-bz-file-name') || !res?.headers?.get('x-bz-file-id')) problemUrls.push(url)
+}
+
+
+
+module.exports = {
+  async up(knex) {
+
+    // Get all VODs from the database
+    const vods = await knex.select('*').from('vods');
+
+    // sanity check every B2 URL
+    for (const vod of vods) {
+      await checkUrl(vod.video_src)
+    }
+
+    process.exit(5923423)
+  },
+};

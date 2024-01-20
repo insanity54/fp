@@ -1,0 +1,118 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vtubers",
+  "info": {
+    "singularName": "vtuber",
+    "pluralName": "vtubers",
+    "displayName": "Vtuber",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "displayName": {
+      "type": "string",
+      "required": true
+    },
+    "chaturbate": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "patreon": {
+      "type": "string"
+    },
+    "twitch": {
+      "type": "string"
+    },
+    "tiktok": {
+      "type": "string"
+    },
+    "onlyfans": {
+      "type": "string"
+    },
+    "youtube": {
+      "type": "string"
+    },
+    "linktree": {
+      "type": "string"
+    },
+    "carrd": {
+      "type": "string"
+    },
+    "fansly": {
+      "type": "string"
+    },
+    "pornhub": {
+      "type": "string"
+    },
+    "discord": {
+      "type": "string"
+    },
+    "reddit": {
+      "type": "string"
+    },
+    "throne": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "merch": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "vods": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::vod.vod",
+      "mappedBy": "vtuber"
+    },
+    "description1": {
+      "type": "text",
+      "required": true
+    },
+    "description2": {
+      "type": "text"
+    },
+    "image": {
+      "type": "string",
+      "required": true
+    },
+    "themeColor": {
+      "type": "string",
+      "default": "#353FFF",
+      "required": true
+    },
+    "imageBlur": {
+      "type": "string",
+      "default": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABmJLR0QA/wD/AP+gvaeTAAAADUlEQVQImWMwtf//HwAEkwJzh0T9qwAAAABJRU5ErkJggg=="
+    },
+    "toys": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::toy.toy"
+    },
+    "toy": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::toy.toy",
+      "inversedBy": "vtubers"
+    },
+    "streams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stream.stream",
+      "mappedBy": "vtuber"
+    }
+  }
+}

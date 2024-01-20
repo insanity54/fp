@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tweets",
+  "info": {
+    "singularName": "tweet",
+    "pluralName": "tweets",
+    "displayName": "Tweet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "id_str": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    },
+    "url": {
+      "type": "string",
+      "required": false
+    },
+    "date2": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    },
+    "json": {
+      "type": "text",
+      "required": true
+    },
+    "vtuber": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::vtuber.vtuber"
+    },
+    "isChaturbateInvite": {
+      "type": "boolean"
+    },
+    "isFanslyInvite": {
+      "type": "boolean"
+    },
+    "date": {
+      "type": "datetime",
+      "unique": true
+    }
+  }
+}

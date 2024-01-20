@@ -1,0 +1,98 @@
+
+const fetch = require('node-fetch')
+
+// greets chatgpt
+async function getFileDetailsFromUrl(url) {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  const options = {
+    signal,
+  };
+
+  let retries = 10;
+
+  while (retries) {
+    console.log(`fetching ${url}`);
+    const timeoutId = setTimeout(() => {
+      console.log('fetch timed out, aborting...');
+      controller.abort();
+    }, 5000);
+
+    try {
+      const res = await fetch(url, options);
+
+      clearTimeout(timeoutId);
+
+      console.log('finished fetch');
+      if (!res.ok) throw new Error(`problem while getting file from url with url ${url}`);
+      if (!res?.headers?.get('x-bz-file-name')) throw new Error(`${url} did not have a x-bz-file-name in the response headers`);
+      if (!res?.headers?.get('x-bz-file-id')) throw new Error(`${url} did not have a x-bz-file-id in the response headers`);
+
+      return {
+        key: res.headers.get('x-bz-file-name'),
+        url: url,
+        uploadId: res.headers.get('x-bz-file-id'),
+      };
+    } catch (err) {
+      clearTimeout(timeoutId);
+      retries--;
+
+      if (retries === 0) {
+        console.error(`Could not fetch file details from URL: ${url}.`);
+        throw err;
+      }
+
+      console.warn(`Retrying fetch (${retries} attempts left)`);
+    }
+  }
+}
+
+
+
+
+module.exports = {
+  async up(knex) {
+    // You have full access to the Knex.js API with an already initialized connection to the database
+
+    // Get all VODs from the database
+    const vods = await knex.select('*').from('vods');
+
+
+    // Process each VOD
+    for (const vod of vods) {
+
+      // courtesy timer
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      console.log(vod)
+      // Get the file details from the VOD's video source URL
+      if (vod?.video_src) {
+        try {
+          const fileDetails = await getFileDetailsFromUrl(vod.video_src);
+
+          // Insert the B2 file into the database
+          const [file] = await knex('b2_files').insert({
+            url: fileDetails.url,
+            key: fileDetails.key,
+            upload_id: fileDetails.uploadId,
+          }).returning('id');
+
+          console.log(file)
+          console.log(`attempting to insert vod_id:${vod.id}, b_2_file_id:${file.id} for videoSrcB2`)
+
+          // Link the B2 file to the VOD
+          await knex('vods_video_src_b_2_links').insert({
+            vod_id: vod.id,
+            b_2_file_id: file.id,
+          });
+        } catch (e) {
+          console.error(e)
+          console.log(`there was an error so we are skipping vod ${vod.id}`)
+        }
+      } else {
+        console.log(`${vod.id} has no video_src. skipping.`)
+      }
+    }
+  },
+};

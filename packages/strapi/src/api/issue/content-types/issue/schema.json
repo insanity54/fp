@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "issues",
+  "info": {
+    "singularName": "issue",
+    "pluralName": "issues",
+    "displayName": "issue",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "sla": {
+      "type": "enumeration",
+      "enum": [
+        "public",
+        "patron",
+        "authenticated"
+      ],
+      "default": "public",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "stall"
+      ]
+    }
+  }
+}

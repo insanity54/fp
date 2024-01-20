@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tag_vod_relations",
+  "info": {
+    "singularName": "tag-vod-relation",
+    "pluralName": "tag-vod-relations",
+    "displayName": "Tag Vod Relation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "votes": {
+      "type": "integer"
+    },
+    "creator": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag"
+    },
+    "creatorId": {
+      "type": "integer",
+      "required": true
+    },
+    "vod": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::vod.vod",
+      "inversedBy": "tagVodRelations"
+    }
+  }
+}
