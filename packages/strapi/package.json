@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^4.0.0",
-    "@aws-sdk/client-s3": "^3.485.0",
+    "@aws-sdk/client-s3": "^3.529.0",
     "@esm2cjs/execa": "6.1.1-cjs.1",
     "@mux/mux-node": "^7.3.3",
     "@paralleldrive/cuid2": "^2.2.2",
