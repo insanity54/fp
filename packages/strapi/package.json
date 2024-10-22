@@ -23,7 +23,7 @@
     "@radix-ui/react-use-callback-ref": "^1.0.1",
     "@strapi/plugin-i18n": "4.17.0",
     "@strapi/plugin-users-permissions": "4.17.0",
-    "@strapi/provider-email-sendgrid": "4.17.0",
+    "@strapi/provider-email-sendgrid": "5.1.0",
     "@strapi/provider-upload-cloudinary": "4.17.0",
     "@strapi/strapi": "4.17.0",
     "@strapi/utils": "4.17.0",
