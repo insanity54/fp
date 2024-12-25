@@ -34,7 +34,7 @@
     "aws-sdk": "^2.1539.0",
     "bcryptjs": "2.4.3",
     "better-sqlite3": "8.0.1",
-    "canvas": "^2.11.2",
+    "canvas": "^3.0.0",
     "codemirror": "^6.0.1",
     "css-loader": "^6.8.1",
     "cuid": "^3.0.0",
