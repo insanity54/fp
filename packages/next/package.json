@@ -52,7 +52,7 @@
     "lodash": "^4.17.21",
     "lunarphase-js": "^2.0.1",
     "multiformats": "^13.0.1",
-    "next": "^14.0.4",
+    "next": "^14.2.35",
     "next-goatcounter": "^1.0.5",
     "nextjs-toploader": "^1.6.4",
     "plyr": "^3.7.8",
